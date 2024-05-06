@@ -1,0 +1,9 @@
+.data #área onde são armazenadas as var globais.
+	hello: .string 	"Ola Mundo\n"  #cria uma label hello, depois indica o tipo de elemento e por fim a string que quero
+	
+.text # os itens subsequentes serão armazenados no segmento de texto no proxímo endereço disponível
+
+li a7 , 4 #load imediate, registrador a7 e a id da função printstring
+
+la a0,hello  #load adress, registrador a0 e o endereço, no caso a label, da string desejada
+ecall

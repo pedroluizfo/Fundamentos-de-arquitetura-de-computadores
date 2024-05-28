@@ -1,0 +1,39 @@
+.data
+n: .word 0 #número de entradas "n"
+max: .word -2147483648 
+linebreak: .string "\n"
+
+.text
+.globl _start #inicialização das vriaveis globais
+_start:
+    li a7, 5         # ler o número de entradas "n"
+    ecall           
+    mv t0, a0        # salvar n(a0) em t0
+
+    li t1, 0         # iniciar o contador do loop como 0
+    la t2, max       # carregar max(0)
+loop:
+    bge t1, t0, end  # condicional se contador >= n, finaliza o loop
+    li a7, 5         
+    ecall            
+    lw t3, 0(t2)     
+    blt t3, a0, update_max # incrementa max se for menor que n
+
+next:
+    addi t1, t1, 1   # incrementa em 1 o loop t1++
+    j loop           
+
+update_max:
+    sw a0, 0(t2)     # salva o valor incrementado de max
+    j next           
+
+end:
+    lw a0, 0(t2)     # salva o maior valor em a0
+    li a7, 1        
+    ecall
+    la t4, linebreak #quebra de linha
+    mv a0, t4
+    li a7, 4
+    ecall
+
+ 

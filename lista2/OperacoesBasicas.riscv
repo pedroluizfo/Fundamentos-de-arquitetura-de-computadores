@@ -1,0 +1,130 @@
+.data
+linebreak: .string "\n" #quebra de linha
+ADD: .string "ADD: "
+SUB: .string "SUB: "
+AND: .string "AND: "
+OR: .string "OR: "
+XOR: .string "XOR: "
+MASK: .string "MASK: "
+SLL: .string "SLL("
+SRL:.string "SRL("
+parenteses: .string "): "
+
+.text
+li a7, 5 #ler o primeiro inteiro
+ecall
+mv t1,a0  #salvar o inteiro que está no registrador a0 em t1
+
+li a7, 5 #ler o segundo número
+ecall
+
+mv t2, a0 #salvar o segundo inteiro em t2
+
+li a7 , 5 # ler o terceiro inteiro 
+ecall 
+mv t3, a0 #salvar o terceiro inteiro em t3
+
+#aqui são as operações
+add a2, t1,t2 #somar t1(A)com t2(B) e salvar em a2
+sub a3, t1,t2 #subtrção de t1 e t2 e salvar em a3
+and a4, t1,t2 #operação AND entre t1 e t2 e salva em a4
+or a5, t1,t2 #operação OR entre t1 e t2 e salva em a5
+xor a6, t1,t2 #operação XOR entre t1 e t2 e salva em a6
+andi s2, t3,31 #operação MASK
+sll t4, t1,s2 #deslocamneto de m a esquerdaa de a
+srl t5, t2,s2 #deslocamneto de m a direita de b
+
+
+# essa rotina será repetida para cada operação, primeiro a soma
+la a0, ADD #load address ADD
+li a7, 4 #print String
+ecall
+mv a0, a2 #move a2 para a0
+li a7, 1 #print INT
+ecall
+la a0, linebreak #load address LINEBREAK
+li, a7, 4 #quebra de linha
+ecall
+#subtração
+la a0, SUB #load address SUB
+li a7, 4 #print String
+ecall
+mv a0, a3 #move a3 para a0
+li a7, 1 #print INT
+ecall
+la a0, linebreak #load address LINEBREAK
+li, a7, 4 #quebra de linha
+ecall
+#and
+la a0, AND #load address AND
+li a7, 4 #print String
+ecall
+mv a0, a4 #move a4 para a0
+li a7, 1 #print INT
+ecall
+la a0, linebreak #load address LINEBREAK
+li, a7, 4 #quebra de linha
+ecall
+#OR
+la a0, OR #load address OR
+li a7, 4 #print String
+ecall
+mv a0, a5 #move a5 para a0
+li a7, 1 #print INT
+ecall
+la a0, linebreak #load address LINEBREAK
+li, a7, 4 #quebra de linha
+ecall
+#XOR
+la a0, XOR #load address XOR
+li a7, 4 #print String
+ecall
+mv a0, a6 #move a5 para a0
+li a7, 1 #print INT
+ecall
+la a0, linebreak #load address LINEBREAK
+li, a7, 4 #quebra de linha
+ecall
+#mask
+la a0, MASK #load address MASK
+li a7, 4 #print String
+ecall
+mv a0, s2 #move s2 para a0
+li a7, 1 #print INT
+ecall
+la a0, linebreak #load address LINEBREAK
+li, a7, 4 #quebra de linha
+ecall
+#sll
+la a0, SLL #load address MASK
+li a7, 4 #print String
+ecall
+mv a0, s2 #move s2 para a0
+li a7, 1 #print INT
+ecall
+la a0, parenteses #load address MASK
+li a7, 4 #print String
+ecall
+mv a0, t4 #move t4 para a0
+li a7, 1 #print INT
+ecall
+la a0, linebreak #load address LINEBREAK
+li, a7, 4 #quebra de linha
+ecall
+#srl
+la a0, SRL #load address MASK
+li a7, 4 #print String
+ecall
+mv a0, s2 #move s2 para a0
+li a7, 1 #print INT
+ecall
+la a0, parenteses #load address MASK
+li a7, 4 #print String
+ecall
+mv a0, t5 #move t5 para a0
+li a7, 1 #print INT
+ecall
+la a0, linebreak #load address LINEBREAK
+li, a7, 4 #quebra de linha
+ecall
+

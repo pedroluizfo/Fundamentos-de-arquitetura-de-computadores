@@ -1,0 +1,16 @@
+
+.text
+li a7, 5 #syscall com a função ReadInt (1 número)
+ecall
+
+mv t0, a0 #mover o conteúdo de a0(que é o regitrador que a função ReadInt salva o input) para o registrador temporario t0
+
+li a7, 5 #(2 número)
+ecall
+
+mv t1, a0 #mov o conteúdo de a0 para t1
+add t2,t0,t1 # função de somar o valor salvo no registrador t0 com t1 e guardar o resultado em t2
+
+li a7, 1#syscall printInt
+mv a0,t2#a syscall anterior printa o valor salvo em a0, então movi t2 para a0
+ecall
